@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Nadheer Nilamutheen</title>
+    <link rel="icon" type="image/png" href="images/favicon.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Lora',serif;background:#0A1128;color:#E8EDFF;line-height:1.6;scroll-behavior:smooth}
+        :root{--blue:#3B82F6}
+        h1,h2,h3,h4,.section-title,.hero-name,.exp-content h3,.edu-card h3,.project-info h3,.timeline-label,.initials,.mobile-menu li a,.btn-resume,.skill-badge,.tool-name{font-family:'Lora',serif}
+        .initials{position:fixed;top:24px;left:28px;z-index:1001;font-size:1.3rem;font-weight:700;color:var(--blue);letter-spacing:1px;background:rgba(17,26,46,0.6);backdrop-filter:blur(8px);padding:8px 16px;border-radius:40px;border:1px solid rgba(59,130,246,0.3);transition:all 0.2s}
+        .initials:hover{background:rgba(59,130,246,0.2);transform:scale(1.02)}
+        ::-webkit-scrollbar{width:5px}
+        ::-webkit-scrollbar-track{background:#0A1128}
+        ::-webkit-scrollbar-thumb{background:var(--blue);border-radius:5px}
+        .timeline-nav{position:fixed;left:28px;top:50%;transform:translateY(-50%);z-index:1000;width:140px}
+        .timeline-dots-container{position:relative;height:380px;display:flex;flex-direction:column;justify-content:space-between}
+        .timeline-item{display:flex;align-items:center;gap:12px;cursor:pointer;transition:.2s}
+        .timeline-marker{width:10px;height:10px;background:rgba(59,130,246,0.4);border-radius:50%;transition:.2s;flex-shrink:0}
+        .timeline-item.active .timeline-marker{background:var(--blue);box-shadow:0 0 10px var(--blue);transform:scale(1.4)}
+        .timeline-label{font-size:.7rem;font-weight:700;letter-spacing:1px;color:#B9C8FF;text-transform:uppercase;opacity:.7;white-space:nowrap}
+        .timeline-item.active .timeline-label{opacity:1;color:var(--blue);font-weight:800}
+        .mobile-nav{display:none;position:fixed;top:20px;right:20px;z-index:1100}
+        .hamburger{background:#111A2E;border:1px solid #2A3A5E;width:46px;height:46px;border-radius:12px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer}
+        .hamburger span{width:22px;height:2px;background:#fff}
+        .mobile-menu{position:fixed;top:80px;right:20px;background:#111A2E;backdrop-filter:blur(12px);border-radius:20px;padding:1rem;width:180px;border:1px solid #2A3A5E;transform:scaleY(0);transform-origin:top;transition:transform .25s ease}
+        .mobile-menu.open{transform:scaleY(1)}
+        .mobile-menu ul{list-style:none}
+        .mobile-menu li a{color:#fff;text-decoration:none;display:block;padding:10px;font-weight:600;letter-spacing:1px;font-size:.8rem}
+        .main-content{max-width:1200px;margin:0 auto;padding:0 2rem 4rem 2rem}
+        .section{padding:80px 0 60px 0;opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .5s ease;text-align:center}
+        .section.visible{opacity:1;transform:translateY(0)}
+        .section-title{text-align:center;font-size:1.9rem;letter-spacing:2px;font-weight:700;margin-bottom:3rem;color:var(--blue);text-transform:none}
+        .about-text{max-width:800px;margin:0 auto}
+        .timeline-experience{max-width:900px;margin:0 auto;text-align:left;display:flex;flex-direction:column;gap:1.8rem}
+        .projects-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;text-align:left}
+        .skills-tools-grid{max-width:1000px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:2rem}
+        .contact-card{max-width:800px;margin:0 auto;justify-content:center}
+        .card-simple,.exp-card,.edu-card,.skills-section,.tools-section,.project-card{background:#111A2E;border-radius:24px;border:1px solid #1F2A46;transition:all .3s cubic-bezier(0.2,0.9,0.4,1.1)}
+        .card-simple:hover,.exp-card:hover,.edu-card:hover,.skills-section:hover,.tools-section:hover,.project-card:hover{border-color:var(--blue);transform:translateY(-5px);box-shadow:0 12px 28px rgba(59,130,246,0.15)}
+        .hero-section{min-height:90vh;display:flex;flex-direction:column;justify-content:center;align-items:center}
+        .profile-circle{width:160px;height:160px;margin:0 auto 1.8rem;border-radius:50%;overflow:hidden;border:3px solid var(--blue);transition:transform .3s ease}
+        .profile-circle:hover{transform:scale(1.02)}
+        .profile-circle img{width:100%;height:100%;object-fit:cover}
+        .hero-name{font-size:3.2rem;font-weight:800;color:#fff;margin-bottom:.5rem}
+        .hero-subtitle{font-size:1.2rem;color:#B9C8FF;margin-bottom:2rem}
+        .hero-details{display:flex;justify-content:center;gap:1.5rem;flex-wrap:wrap}
+        .location-badge{background:transparent;border:1.5px solid var(--blue);padding:.6rem 1.6rem;border-radius:40px;color:#fff;font-weight:500;display:inline-flex;align-items:center;gap:8px;cursor:default}
+        .btn-resume{background:transparent;border:1.5px solid var(--blue);padding:.6rem 1.6rem;border-radius:40px;color:#fff;font-weight:500;text-decoration:none;transition:.2s;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+        .btn-resume:hover{background:var(--blue);color:#0A1128;transform:translateY(-2px)}
+        .card-simple.about-text{padding:2rem;font-size:1.1rem}
+        .exp-card{padding:1.5rem;display:flex;gap:1.5rem}
+        .exp-logo img{width:64px;height:64px;border-radius:16px;object-fit:cover}
+        .exp-content h3{font-size:1.4rem;margin-bottom:.5rem}
+        .exp-metadata{display:flex;flex-wrap:wrap;gap:.8rem;margin-bottom:.8rem}
+        .meta-chip{display:inline-flex;align-items:center;gap:6px;background:#1E2948;padding:.3rem 1rem;border-radius:40px;font-size:.7rem;color:#B9C8FF}
+        .meta-chip i{color:var(--blue)}
+        .edu-card{padding:1.5rem;max-width:900px;margin:0 auto;text-align:left}
+        .edu-header{display:flex;gap:1.5rem;margin-bottom:1.2rem}
+        .edu-icon-large{width:64px;height:64px;background:#1E2A44;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:var(--blue)}
+        .edu-title h3{font-size:1.4rem}
+        .edu-metadata{display:flex;flex-wrap:wrap;gap:.8rem;margin:.5rem 0}
+        .edu-meta-chip,.gpa-chip{display:inline-flex;align-items:center;gap:6px;background:#1E2948;padding:.3rem 1rem;border-radius:40px;font-size:.7rem;color:#B9C8FF}
+        .edu-meta-chip i,.gpa-chip i{color:var(--blue)}
+        .coursework-section{margin-top:1.2rem;padding-top:1rem;border-top:1px solid #1F2A46}
+        .coursework-section h4{font-size:.9rem;color:var(--blue);margin-bottom:.8rem}
+        .course-badges-circle{display:flex;flex-wrap:wrap;gap:.8rem}
+        .course-badge-circle{background:#1E2948;padding:.4rem 1rem;border-radius:40px;font-size:.75rem;color:#E0E7FF;transition:.2s}
+        .course-badge-circle:hover{background:var(--blue);color:#0A1128;transform:translateY(-2px)}
+        .project-card{overflow:hidden;display:flex;flex-direction:column}
+        .project-img img{width:100%;height:180px;object-fit:cover;transition:transform .4s ease}
+        .project-card:hover .project-img img{transform:scale(1.03)}
+        .project-info{padding:1.5rem;display:flex;flex-direction:column;flex:1}
+        .project-info h3{font-size:1.2rem;margin-bottom:.5rem}
+        .project-metadata{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:.8rem}
+        .project-meta-chip{display:inline-flex;align-items:center;gap:5px;background:#1E2948;padding:.25rem .9rem;border-radius:40px;font-size:.65rem;color:#B9C8FF}
+        .project-meta-chip i{color:var(--blue)}
+        .project-info p{font-size:.85rem;color:#C0CBF0;margin-bottom:1.5rem;line-height:1.5;flex:1}
+        .btn-view-project{background:var(--blue);border:none;width:48px;height:48px;border-radius:50%;color:#fff;font-weight:600;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .3s ease;margin-top:.5rem;align-self:flex-start;box-shadow:0 4px 12px rgba(59,130,246,0.3)}
+        .btn-view-project i{font-size:1.2rem}
+        .btn-view-project:hover{transform:translateX(5px) scale(1.05);background:#2563eb;box-shadow:0 6px 16px rgba(59,130,246,0.5)}
+        .skills-section,.tools-section{padding:1.8rem;text-align:center}
+        .skills-section h3,.tools-section h3{font-size:1.2rem;margin-bottom:1.2rem;color:var(--blue);letter-spacing:2px;font-weight:700}
+        .skills-tag-group,.tools-tag-group{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+        .skill-badge{background:#1E2948;padding:.5rem 1.2rem;border-radius:40px;font-size:.8rem;color:#E0E7FF;transition:.2s}
+        .skill-badge:hover{background:var(--blue);color:#0A1128;transform:translateY(-2px)}
+        .tool-item{display:flex;flex-direction:column;align-items:center;gap:8px;transition:.2s;width:80px}
+        .tool-item:hover{transform:translateY(-5px)}
+        .tool-icon{width:60px;height:60px;background:linear-gradient(135deg,#1E2A44,#111A2E);border:1px solid rgba(59,130,246,0.4);border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        .tool-icon img{width:100%;height:100%;object-fit:cover}
+        .tool-item:hover .tool-icon{border-color:var(--blue);box-shadow:0 4px 12px rgba(59,130,246,0.2)}
+        .tool-name{font-size:.7rem;color:#8A99C7;font-weight:500;opacity:0;transition:opacity .2s}
+        .tool-item:hover .tool-name{opacity:1;color:var(--blue)}
+        .contact-card{display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;background:#111A2E;border-radius:28px;padding:2rem;border:1px solid #1F2A46;transition:all .3s ease}
+        .contact-card:hover{border-color:var(--blue);transform:translateY(-3px)}
+        .contact-item{display:flex;align-items:center;gap:12px;font-size:.95rem}
+        .contact-item i{color:var(--blue);width:24px}
+        .contact-item a{color:#E8EDFF;text-decoration:none;border-bottom:1px dotted #3B82F6}
+        .footer{text-align:center;padding:3rem 0 1rem;font-size:.8rem;color:#6D7BA8}
+        @media (max-width:950px){
+            .initials{top:16px;left:16px;font-size:1rem;padding:6px 12px}
+            .timeline-nav{display:none}
+            .mobile-nav{display:block}
+            .main-content{padding:0 1.2rem 3rem}
+            .hero-name{font-size:2.2rem}
+            .projects-grid{grid-template-columns:1fr}
+            .exp-card{flex-direction:column;align-items:center;text-align:center}
+            .edu-header{flex-direction:column;align-items:center;text-align:center}
+            .exp-metadata,.edu-metadata,.project-metadata{justify-content:center}
+            .btn-view-project{align-self:center}
+        }
+        @media (max-width:640px){
+            .initials{top:12px;left:12px;font-size:.9rem;padding:5px 10px}
+            .section-title{font-size:1.5rem}
+            .hero-name{font-size:1.8rem}
+            .profile-circle{width:120px;height:120px}
+            .contact-card{flex-direction:column;align-items:center}
+            .tool-icon{width:50px;height:50px}
+            .tool-item{width:65px}
+        }
+    </style>
+</head>
+<body>
+    <div class="initials">NN</div>
+    <div class="timeline-nav"><div class="timeline-dots-container" id="timelineDotsContainer"></div></div>
+    <div class="mobile-nav"><button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button><div class="mobile-menu" id="mobileMenu"><ul><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#experience">Experience</a></li><li><a href="#education">Education</a></li><li><a href="#projects">Projects</a></li><li><a href="#skills-tools">Skills & Tools</a></li><li><a href="#contact">Contact</a></li></ul></div></div>
+    <main class="main-content">
+        <section id="home" class="section hero-section">
+            <div class="profile-circle"><img src="images/profile.jpg" alt="Profile"></div>
+            <h1 class="hero-name">Nadheer Nilamutheen</h1>
+            <p class="hero-subtitle">Economics and Psychology at Rutgers University</p>
+            <div class="hero-details"><div class="location-badge"><i class="fas fa-map-marker-alt"></i> New Jersey, USA</div><div class="hero-resume-btn"><a href="#" id="resumeBtn" class="btn-resume"><i class="fas fa-file-pdf"></i> Resume</a></div></div>
+        </section>
+        <section id="about" class="section"><h2 class="section-title">About Me</h2><div class="card-simple about-text">Hi! My name is Nadheer, and I’m a student at Rutgers University–New Brunswick pursuing a bachelor’s degree in economics and psychology. Throughout the past few years, I’ve been exploring different areas in business such as data analytics, consulting, and marketing. Additionally, I have gained experience in public policy research and UI/UX design. I'm passionate about combining analytics, research, and creativity to make meaningful contributions in the field of business.</div></section>
+        <section id="experience" class="section"><h2 class="section-title">Experience</h2><div class="timeline-experience">
+            <div class="exp-card"><div class="exp-logo"><img src="images/urban-food-alliance.jpg" alt="Urban Food Alliance"></div><div class="exp-content"><h3>Urban Food Alliance</h3><div class="exp-metadata"><span class="meta-chip"><i class="fas fa-briefcase"></i> Business Analyst Intern</span><span class="meta-chip"><i class="fas fa-calendar-alt"></i> Jan 2026 - Apr 2026</span><span class="meta-chip"><i class="fas fa-map-marker-alt"></i> Franklin Park, NJ</span></div><p>I acted as a bridge between the organization’s mission to fight food insecurity and the implementation of modern AI tools to improve efficiency. This involved conducting detailed gap analyses and creating the technical documentation necessary to build smarter, data-driven workflows.</p></div></div>
+            <div class="exp-card"><div class="exp-logo"><img src="images/mas-youth-center.jpg" alt="MAS Youth Center"></div><div class="exp-content"><h3>MAS Youth Center of New Jersey</h3><div class="exp-metadata"><span class="meta-chip"><i class="fas fa-briefcase"></i> Marketing Intern</span><span class="meta-chip"><i class="fas fa-calendar-alt"></i> Jan 2026 - Apr 2026</span><span class="meta-chip"><i class="fas fa-map-marker-alt"></i> New Brunswick, NJ</span></div><p>I oversaw the center's digital outreach strategy by automating social media campaigns and analyzing engagement trends to better serve the community. Tracking these key performance metrics allowed me to refine our messaging and ensure that vital resources reached those populations.</p></div></div>
+            <div class="exp-card"><div class="exp-logo"><img src="images/cell-revolution.jpg" alt="Cell Revolution"></div><div class="exp-content"><h3>Cell Revolution LLC</h3><div class="exp-metadata"><span class="meta-chip"><i class="fas fa-briefcase"></i> Technical Operations Intern</span><span class="meta-chip"><i class="fas fa-calendar-alt"></i> Sep 2024 - Feb 2025</span><span class="meta-chip"><i class="fas fa-map-marker-alt"></i> Edison, NJ</span></div><p>I managed the quality assurance process by testing and diagnosing hardware faults across a high volume of mobile devices to ensure reliability. Identifying these technical glitches allowed me to maintain strict functional standards before any product was cleared for distribution.</p></div></div>
+        </div></section>
+        <section id="education" class="section"><h2 class="section-title">Education</h2><div class="edu-card"><div class="edu-header"><div class="edu-icon-large"><img src="images/rutgers-logo.jpg" alt="Rutgers" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"></div><div class="edu-title"><h3>Rutgers University–New Brunswick</h3><div class="edu-metadata"><span class="edu-meta-chip"><i class="fas fa-graduation-cap"></i> B.A. in Economics and Psychology</span><span class="edu-meta-chip"><i class="fas fa-calendar-alt"></i> Sep 2025 - Dec 2028</span><span class="edu-meta-chip"><i class="fas fa-map-marker-alt"></i> New Brunswick, NJ</span><span class="gpa-chip"><i class="fas fa-star"></i> GPA: 4.00 / 4.00</span></div></div></div><div class="coursework-section"><h4><i class="fas fa-book-open"></i> Coursework</h4><div class="course-badges-circle"><span class="course-badge-circle">College Writing</span><span class="course-badge-circle">Calculus I</span><span class="course-badge-circle">Statistics I</span><span class="course-badge-circle">Intro to Macroeconomics</span><span class="course-badge-circle">Intro to Microeconomics</span><span class="course-badge-circle">Introduction to Psychology</span></div></div></div></section>
+        <section id="projects" class="section"><h2 class="section-title">Projects</h2><div class="projects-grid">
+            <div class="project-card"><div class="project-img"><img src="images/unctad-project.jpg" alt="UNCTAD"></div><div class="project-info"><h3>UNCTAD - Rutgers Model UN 2026</h3><div class="project-metadata"><span class="project-meta-chip"><i class="fas fa-building"></i> Institute for Domestic and International Affairs</span><span class="project-meta-chip"><i class="fas fa-calendar-alt"></i> Dec 2025 - Nov 2026</span><span class="project-meta-chip"><i class="fas fa-map-marker-alt"></i> New Brunswick, NJ</span></div><p>I wrote a forty-page brief on how food financialization affects global inflation for Rutgers Model United Nations 2026. My role also includes leading high school students through debates to help them understand and solve these international economic and policy issues.</p><button class="btn-view-project" data-project="unctad"><i class="fas fa-arrow-right"></i></button></div></div>
+            <div class="project-card"><div class="project-img"><img src="images/healthe-project.jpg" alt="HealthE"></div><div class="project-info"><h3>HealthE Go-To-Market Strategy</h3><div class="project-metadata"><span class="project-meta-chip"><i class="fas fa-building"></i> Rutgers Deloitte Case Challenge</span><span class="project-meta-chip"><i class="fas fa-calendar-alt"></i> Apr 2026</span><span class="project-meta-chip"><i class="fas fa-map-marker-alt"></i> New Brunswick, NJ</span></div><p>I worked with two students to build a pitch deck for launching a healthcare app designed for underserved areas. We analyzed family budgets and demographic data to ensure its affordability for rural communities, which secured second place for our team.</p><button class="btn-view-project" data-project="healthe"><i class="fas fa-arrow-right"></i></button></div></div>
+            <div class="project-card"><div class="project-img"><img src="images/foodrelief-project.jpg" alt="Food Relief"></div><div class="project-info"><h3>Food Relief Donor Assistant - AI Chatbot</h3><div class="project-metadata"><span class="project-meta-chip"><i class="fas fa-building"></i> Urban Food Alliance</span><span class="project-meta-chip"><i class="fas fa-calendar-alt"></i> Jan 2026 - Mar 2026</span><span class="project-meta-chip"><i class="fas fa-map-marker-alt"></i> Franklin Park, NJ</span></div><p>I served as the business analyst for an AI chatbot designed to help donors contribute to food relief efforts easily. My work focused on writing the official requirements and technical documentation needed to guide the development team during the build.</p><button class="btn-view-project" data-project="foodrelief"><i class="fas fa-arrow-right"></i></button></div></div>
+            <div class="project-card"><div class="project-img"><img src="images/ruparking-project.jpg" alt="RU Parking"></div><div class="project-info"><h3>RU Parking?</h3><div class="project-metadata"><span class="project-meta-chip"><i class="fas fa-building"></i> CGI Consulting Challenge 2026</span><span class="project-meta-chip"><i class="fas fa-calendar-alt"></i> Feb 2026</span><span class="project-meta-chip"><i class="fas fa-map-marker-alt"></i> New Brunswick, NJ</span></div><p>I worked with a team to design a system that solves parking congestion for Rutgers commuter students. We proposed using deep learning models and sensors to provide real-time lot availability updates through a mobile app to reduce daily travel stress.</p><button class="btn-view-project" data-project="ruparking"><i class="fas fa-arrow-right"></i></button></div></div>
+        </div></section>
+        <section id="skills-tools" class="section"><h2 class="section-title">Skills & Tools</h2><div class="skills-tools-grid"><div class="skills-section"><h3>Skills</h3><div class="skills-tag-group"><span class="skill-badge">Data Analytics</span><span class="skill-badge">Project Management</span><span class="skill-badge">Digital Marketing</span><span class="skill-badge">Market Research</span><span class="skill-badge">User Research</span><span class="skill-badge">UI/UX Design</span><span class="skill-badge">Wireframing</span><span class="skill-badge">Documentation</span></div></div><div class="tools-section"><h3>Tools</h3><div class="tools-tag-group"><div class="tool-item"><div class="tool-icon"><img src="images/python-logo.jpg" alt="Python"></div><span class="tool-name">Python</span></div><div class="tool-item"><div class="tool-icon"><img src="images/sql-logo.jpg" alt="SQL"></div><span class="tool-name">SQL</span></div><div class="tool-item"><div class="tool-icon"><img src="images/excel-logo.jpg" alt="Excel"></div><span class="tool-name">MS Excel</span></div><div class="tool-item"><div class="tool-icon"><img src="images/meta-logo.jpg" alt="Meta"></div><span class="tool-name">Meta Suite</span></div><div class="tool-item"><div class="tool-icon"><img src="images/github-logo.jpg" alt="GitHub"></div><span class="tool-name">GitHub</span></div><div class="tool-item"><div class="tool-icon"><img src="images/figma-logo.jpg" alt="Figma"></div><span class="tool-name">Figma</span></div><div class="tool-item"><div class="tool-icon"><img src="images/notion-logo.jpg" alt="Notion"></div><span class="tool-name">Notion</span></div><div class="tool-item"><div class="tool-icon"><img src="images/canva-logo.jpg" alt="Canva"></div><span class="tool-name">Canva</span></div></div></div></div></section>
+        <section id="contact" class="section"><h2 class="section-title">Contact</h2><div class="contact-card"><div class="contact-item"><i class="fas fa-envelope"></i> <a href="mailto:nadheer.nilamutheen@rutgers.edu">nadheer.nilamutheen@rutgers.edu</a></div><div class="contact-item"><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/nadheer-nilamutheen" target="_blank">linkedin.com/in/nadheer-nilamutheen</a></div></div></section>
+        <footer class="footer">© 2026 Nadheer Nilamutheen</footer>
+    </main>
+    <script>
+        (function(){
+            const s=['home','about','experience','education','projects','skills-tools','contact'],l=['Home','About','Experience','Education','Projects','Skills & Tools','Contact'],c=document.getElementById('timelineDotsContainer'),e=[];
+            function build(){
+                c.innerHTML='';
+                for(let i=0;i<s.length;i++){
+                    const d=document.createElement('div');d.className='timeline-item';d.setAttribute('data-section',s[i]);
+                    const m=document.createElement('span');m.className='timeline-marker';
+                    const t=document.createElement('span');t.className='timeline-label';t.innerText=l[i];
+                    d.appendChild(m);d.appendChild(t);
+                    d.addEventListener('click',((id)=>()=>{const tgt=document.getElementById(id);if(tgt)tgt.scrollIntoView({behavior:'smooth',block:'start'});})(s[i]));
+                    c.appendChild(d);e.push(d);
+                }
+            }
+            function update(){
+                let a=0,st=window.scrollY,wh=window.innerHeight;
+                for(let i=0;i<s.length;i++){
+                    const el=document.getElementById(s[i]);
+                    if(el){
+                        const top=el.offsetTop,bot=top+el.offsetHeight,trigger=st+wh*0.3;
+                        if(trigger>=top&&trigger<bot){a=i;break;}
+                        if(i===s.length-1&&st+wh>=document.documentElement.scrollHeight-50){a=i;break;}
+                    }
+                }
+                e.forEach((item,idx)=>{if(idx===a)item.classList.add('active');else item.classList.remove('active');});
+            }
+            const secs=document.querySelectorAll('.section'),obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.1});
+            secs.forEach(s=>obs.observe(s));
+            setTimeout(()=>{secs.forEach(s=>{if(s.getBoundingClientRect().top<window.innerHeight-100)s.classList.add('visible');});update();},100);
+            document.getElementById('resumeBtn')?.addEventListener('click',e=>{window.open('pdfs/resume.pdf','_blank');});
+            document.querySelectorAll('.btn-view-project').forEach(btn=>{btn.addEventListener('click',e=>{const p=btn.getAttribute('data-project');if(p==='unctad')window.open('pdfs/unctad.pdf','_blank');if(p==='healthe')window.open('pdfs/healthe.pdf','_blank');if(p==='foodrelief')window.open('pdfs/foodrelief.pdf','_blank');if(p==='ruparking')window.open('pdfs/ruparking.pdf','_blank');});});
+            const ham=document.getElementById('hamburgerBtn'),mm=document.getElementById('mobileMenu');
+            if(ham){ham.addEventListener('click',e=>{e.stopPropagation();mm.classList.toggle('open');});document.addEventListener('click',e=>{if(!ham.contains(e.target)&&mm.classList.contains('open'))mm.classList.remove('open');});document.querySelectorAll('.mobile-menu a').forEach(l=>{l.addEventListener('click',()=>mm.classList.remove('open'));});}
+            build();window.addEventListener('scroll',update);window.addEventListener('resize',update);update();
+        })();
+    </script>
+</body>
+</html>
